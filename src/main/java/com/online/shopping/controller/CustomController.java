@@ -25,21 +25,17 @@ public class CustomController extends BaseController {
     public ResultJson updateCustomerInfo(
             @RequestBody Customer customer) {
         try {
-            if (customer == null) {
+            if (customer == null || customer.getId() == null) {
                 return ResultUtil.failWithMsg("参数错误");
             }
-            boolean isUpdate = (customer.getId() != null) && (customer.getId() > 0);
-            if (isUpdate) {
-                Customer ct = shoppingService.selectByCustomerId(customer.getId());
-                if (ct == null) {
-                    return ResultUtil.failWithMsg("客户不存在");
-                }
+            Customer ct = shoppingService.selectByCustomerId(customer.getId());
+            if (ct == null) {
+                shoppingService.insertCustomerSelective(customer);
+                return ResultUtil.successWithMsg("保存成功");
+            } else {
                 customer.setId(ct.getId());
                 shoppingService.updateCustomerSelective(customer);
                 return ResultUtil.successWithMsg("更新成功");
-            } else {
-                shoppingService.insertCustomerSelective(customer);
-                return ResultUtil.successWithMsg("保存成功");
             }
         } catch (Exception e) {
             e.printStackTrace();

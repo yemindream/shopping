@@ -13,18 +13,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("account")
 public class AccountController extends BaseController {
 
-    @PostMapping
-    public ResultJson login(@RequestBody Registration registration) {
-        if (Strings.isNullOrEmpty(registration.getUsername())
-                || Strings.isNullOrEmpty(registration.getPassword())) {
-            return ResultUtil.failWithMsg("username和password不能为空");
-        }
-        Registration user = shoppingService.selectByUserName(registration.getUsername());
-        if (user == null || !user.getPassword().equals(registration.getPassword())) {
-            return ResultUtil.failWithMsg("用户名或密码错误");
-        }
-        return ResultUtil.successWithMsg("登陆成功");
-    }
+//    /**
+//     * 登陆
+//     *
+//     * @param registration
+//     * @return
+//     */
+//    @PostMapping
+//    public ResultJson login(@RequestBody Registration registration) {
+//        if (Strings.isNullOrEmpty(registration.getUsername())
+//                || Strings.isNullOrEmpty(registration.getPassword())) {
+//            return ResultUtil.failWithMsg("username和password不能为空");
+//        }
+//        Registration user = shoppingService.selectByUserName(registration.getUsername());
+//        if (user == null || !user.getPassword().equals(registration.getPassword())) {
+//            return ResultUtil.failWithMsg("用户名或密码错误");
+//        }
+//        return ResultUtil.successWithMsg("登陆成功");
+//    }
 
     /**
      * 检查用户是否已经有帐号

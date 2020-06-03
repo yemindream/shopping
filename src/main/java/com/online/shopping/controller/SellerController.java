@@ -23,7 +23,7 @@ public class SellerController extends BaseController {
     public ResultJson updateSellerInfo(
             @RequestBody Seller seller) {
         try {
-            if (seller == null) {
+            if (seller == null || seller.getId()==null) {
                 return ResultUtil.failWithMsg("参数错误");
             }
             boolean isUpdate = (seller.getId() != null) && (seller.getId() > 0);
