@@ -61,4 +61,9 @@ public class ProductController extends BaseController {
         return ResultUtil.successWithData(page);
     }
 
+    @GetMapping("select")
+    public Object select(@RequestParam("id") int id) {
+        return shoppingService.getProductInfoBySellerId(id);
+    }
+
 }

@@ -12,6 +12,15 @@
   <resultMap id="ResultMapWithBLOBs" type="com.online.shopping.model.Product" extends="BaseResultMap" >
     <result column="image" property="image" jdbcType="LONGVARBINARY" />
   </resultMap>
+  <resultMap id="ProductViewMap" type="com.online.shopping.vo.ProductView" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="seller" property="seller" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="avg_rate" property="avgRatingValue" jdbcType="DOUBLE"/>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, type, seller, price, quantity, description
   </sql>
@@ -28,6 +37,15 @@
   </select>
   <select id="selectAll" resultMap="ResultMapWithBLOBs">
     select * from product
+  </select>
+  <select id="getProductInfoBySellerId" parameterType="java.lang.Integer" resultMap="ProductViewMap">
+    select p.*,CAST(AVG(r.`value`) AS DECIMAL(10,2)) as avg_rate
+    from product p
+    left join rating r on p.id=r.product_id
+    inner join seller s on p.seller=s.id
+    WHERE s.id=#{id}
+    GROUP BY p.id
+    ORDER BY avg_rate DESC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from product

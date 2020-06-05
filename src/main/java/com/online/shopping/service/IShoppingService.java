@@ -2,6 +2,7 @@ package com.online.shopping.service;
 
 import com.online.shopping.common.page.AppPage;
 import com.online.shopping.model.*;
+import com.online.shopping.vo.ProductView;
 import com.online.shopping.vo.PurchaseView;
 
 import java.util.List;
@@ -47,4 +48,7 @@ public interface IShoppingService {
     PurchaseHistory selectPurchaseHistoryById(Long id);
 
     void updatePurchase(PurchaseHistory ph);
+
+    List<ProductView> getProductInfoBySellerId(Integer sellerId);
+
 }
