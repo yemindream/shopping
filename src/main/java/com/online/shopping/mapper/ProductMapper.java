@@ -1,6 +1,8 @@
 package com.online.shopping.mapper;
 
 import com.online.shopping.model.Product;
+import com.online.shopping.vo.ProductView;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,4 +22,6 @@ public interface ProductMapper {
     int updateByPrimaryKey(Product record);
 
     List<Product> selectAll();
+
+    List<ProductView> getProductInfoBySellerId(@Param("id") Integer sellerId);
 }

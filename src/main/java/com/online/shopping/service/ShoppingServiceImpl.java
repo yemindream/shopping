@@ -5,6 +5,7 @@ import com.online.shopping.common.page.AppPage;
 import com.online.shopping.common.page.PageModel;
 import com.online.shopping.mapper.*;
 import com.online.shopping.model.*;
+import com.online.shopping.vo.ProductView;
 import com.online.shopping.vo.PurchaseView;
 import org.springframework.stereotype.Service;
 
@@ -133,6 +134,11 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
     @Override
     public void updatePurchase(PurchaseHistory ph) {
         purchaseHistoryMapper.updateByPrimaryKeySelective(ph);
+    }
+
+    @Override
+    public List<ProductView> getProductInfoBySellerId(Integer sellerId) {
+        return productMapper.getProductInfoBySellerId(sellerId);
     }
 
     @Override
