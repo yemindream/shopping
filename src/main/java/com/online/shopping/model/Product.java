@@ -12,7 +12,7 @@ public class Product {
     @GeneratedValue(generator = "JDBC")
     private Long id;
 
-    private Integer type;
+    private String type;
 
     private Integer seller;
 
