@@ -187,7 +187,7 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
 
         //更新商品库存数量
         Product product = productMapper.selectByPrimaryKey(purchaseHistory.getProductId());
-        product.setQuantity(product.getQuantity()-purchaseHistory.getQuantity());
+        product.setQuantity(product.getQuantity() - purchaseHistory.getQuantity());
         productMapper.updateByPrimaryKey(product);
     }
 
@@ -199,6 +199,49 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
     @Override
     public void insertPayment(Payment payment) {
         paymentMapper.insertSelective(payment);
+    }
+
+    @Override
+    public int cancelPurchase(Long phid) {
+        Payment payment = paymentMapper.selectByPurchaseId(phid);
+        if (payment != null && payment.getState() == 1) {
+            logger.info("用户已经支付了该商品，无法取消（只能退货）");
+            return 1;
+        }
+        PurchaseHistory purchaseHistory = purchaseHistoryMapper.selectByPrimaryKey(phid);
+        purchaseHistory.setState(1);
+        purchaseHistoryMapper.updateByPrimaryKey(purchaseHistory);
+
+        //更新商品库存数量
+        Product product = productMapper.selectByPrimaryKey(purchaseHistory.getProductId());
+        product.setQuantity(product.getQuantity() + purchaseHistory.getQuantity());
+        productMapper.updateByPrimaryKey(product);
+
+        return 0;
+    }
+
+    @Override
+    public int returnPurchase(Long phid) {
+        Payment payment = paymentMapper.selectByPurchaseId(phid);
+        if (payment==null || payment.getState() != 1) {
+            logger.info("用户未支付该商品，无法退货");
+            return 1;
+        }
+        if (payment!=null){
+            payment.setState(3);
+            paymentMapper.updateByPrimaryKey(payment);
+        }
+
+        PurchaseHistory purchaseHistory = purchaseHistoryMapper.selectByPrimaryKey(phid);
+        purchaseHistory.setState(2);
+        purchaseHistoryMapper.updateByPrimaryKey(purchaseHistory);
+
+        //更新商品库存数量
+        Product product = productMapper.selectByPrimaryKey(purchaseHistory.getProductId());
+        product.setQuantity(product.getQuantity() + purchaseHistory.getQuantity());
+        productMapper.updateByPrimaryKey(product);
+
+        return 0;
     }
 
 

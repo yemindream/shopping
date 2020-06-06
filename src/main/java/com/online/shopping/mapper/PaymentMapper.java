@@ -20,4 +20,5 @@ public interface PaymentMapper {
 
     List<Payment> getPaymentListByCustomerId(@Param("id") Integer customerId);
 
+    Payment selectByPurchaseId(@Param("id") Long phid);
 }
