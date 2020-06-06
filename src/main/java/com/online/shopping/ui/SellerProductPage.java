@@ -1,12 +1,15 @@
-package com.online.shopping.model;
+package com.online.shopping.ui;
 
+import com.online.shopping.model.Product;
 import com.online.shopping.service.IShoppingService;
-import com.online.shopping.ui.MainLayout;
+import com.online.shopping.vo.ProductView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.IntegerField;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.BeforeEvent;
@@ -17,16 +20,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Created by yanry on 2020/6/5.
  */
-@Route(value = "product", layout = MainLayout.class)
-public class ProductPage extends HorizontalLayout implements HasUrlParameter<Integer> {
-    private Grid<Product> grid = new Grid<>(Product.class);
+@Route(value = "seller/product", layout = MainLayout.class)
+public class SellerProductPage extends VerticalLayout implements HasUrlParameter<Integer> {
+    private Grid<ProductView> grid = new Grid<>(ProductView.class, false);
     @Autowired
     private IShoppingService shoppingService;
+    private int sellerId;
 
-    public ProductPage() {
+    public SellerProductPage() {
         ProductForm productForm = new ProductForm();
         productForm.setProduct(null);
-        grid.setColumns("type", "price", "quantity", "description");
+        grid.setColumns("id", "type", "price", "quantity", "description", "avgRatingValue");
+        grid.setSelectionMode(Grid.SelectionMode.SINGLE);
         grid.asSingleSelect().addValueChangeListener(event -> {
             productForm.setProduct(grid.asSingleSelect().getValue());
         });
@@ -35,43 +40,61 @@ public class ProductPage extends HorizontalLayout implements HasUrlParameter<Int
             productForm.setProduct(new Product());
         });
 
-        add(new VerticalLayout(btnAdd, grid), productForm);
+        HorizontalLayout mainContent = new HorizontalLayout(grid, productForm);
+        mainContent.setSizeFull();
+        grid.setSizeFull();
+        add(btnAdd, mainContent);
     }
 
     private void updateList() {
-        // todo
+        grid.setItems(shoppingService.getProductInfoBySellerId(sellerId));
     }
 
     @Override
     public void setParameter(BeforeEvent event, Integer parameter) {
+        sellerId = parameter;
         updateList();
     }
 
     private class ProductForm extends FormLayout {
         private TextField type = new TextField("Type");
-        private TextField price = new TextField("price");
-        private TextField quantity = new TextField("Quantity");
+        private NumberField nfPrice = new NumberField("Price");
+        private IntegerField quantity = new IntegerField("Quantity");
         private TextField description = new TextField("Description");
 
         private Binder<Product> binder = new Binder<>(Product.class);
 
         public ProductForm() {
+            quantity.setMin(0);
             Button btnSave = new Button("Save", event -> {
-                shoppingService.updateProductSelective(binder.getBean());
+                Product product = binder.getBean();
+                if (product.getId() == null) {
+                    product.setSeller(sellerId);
+                    shoppingService.insertProductSelective(product);
+                } else {
+                    shoppingService.updateProductSelective(product);
+                }
                 updateList();
                 setProduct(null);
             });
 
-            add(type, price, quantity, description, btnSave);
+            add(type, nfPrice, quantity, description, btnSave);
+            binder.forField(nfPrice).bind(product -> {
+                Long price = product.getPrice();
+                if (price == null) {
+                    return 0d;
+                }
+                return price.doubleValue();
+            }, (product, fieldvalue) -> product.setPrice(fieldvalue.longValue()));
             binder.bindInstanceFields(this);
         }
 
         private void setProduct(Product product) {
             binder.setBean(product);
             if (product == null) {
-                setVisible(false);
+//                setVisible(false);
             } else {
-                setVisible(true);
+//                setVisible(true);
                 type.focus();
             }
         }

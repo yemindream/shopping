@@ -16,7 +16,7 @@ public class PurchaseView {
 
     private Integer quantity;
 
-    private Integer deleveryAddress;
+    private Integer deliveryAddress;
 
     private Date createDate;
 

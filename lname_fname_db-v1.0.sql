@@ -114,13 +114,13 @@ CREATE TABLE `purchase_history`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) NULL DEFAULT NULL,
   `quantity` int(11) NULL DEFAULT NULL,
-  `delevery_address` int(11) NULL DEFAULT NULL,
+  `delivery_address` int(11) NULL DEFAULT NULL,
   `create_date` date NULL DEFAULT NULL,
   `state` int(1) NOT NULL DEFAULT 0 COMMENT '状态（0：正常购买，1：取消，2：退货）',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `fk_purchase_delivery_idx`(`delevery_address`) USING BTREE,
+  INDEX `fk_purchase_delivery_idx`(`delivery_address`) USING BTREE,
   INDEX `fk_purchase_product_idx`(`product_id`) USING BTREE,
-  CONSTRAINT `fk_purchase_delivery` FOREIGN KEY (`delevery_address`) REFERENCES `delivery_address` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_purchase_delivery` FOREIGN KEY (`delivery_address`) REFERENCES `delivery_address` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_purchase_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 

@@ -10,7 +10,7 @@ import com.vaadin.flow.router.RouterLayout;
  */
 public class MainLayout extends VerticalLayout implements RouterLayout {
     public MainLayout() {
-        setWidth("70%");
+        setSizeFull();
         add(new Button("back", event -> UI.getCurrent().navigate("")));
     }
 }

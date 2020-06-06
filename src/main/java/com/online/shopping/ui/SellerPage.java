@@ -23,8 +23,9 @@ public class SellerPage extends VerticalLayout implements HasUrlParameter<Intege
 
     public SellerPage() {
         Button btnEdit = new Button("Set Information", event -> UI.getCurrent().navigate(EditSellerPage.class, id));
+        Button btnProductList = new Button("Set Products", event -> UI.getCurrent().navigate(SellerProductPage.class, id));
 
-        add(title, btnEdit);
+        add(title, btnEdit, btnProductList);
     }
 
     @Override
