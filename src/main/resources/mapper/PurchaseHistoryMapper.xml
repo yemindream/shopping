@@ -36,6 +36,20 @@
     WHERE da.customer_id=#{customerid} AND ph.create_date=#{datestr};
   </select>
 
+  <select id="getPurchaseHistoryListByCustomerId" resultMap="BaseResultMap">
+	select ph.*
+	from purchase_history ph
+	inner join	delivery_address da on ph.delevery_address=da.id
+    inner join customer c on c.id = da.customer_id
+	where c.id=#{id}
+	<if test="startDateStr!=null">
+      ph.create_date>=#{startDateStr}
+    </if>
+    <if test="endDateStr!=null">
+      #{endDateStr}>=ph.create_date
+    </if>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from purchase_history
     where id = #{id,jdbcType=BIGINT}

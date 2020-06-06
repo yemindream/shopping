@@ -5,6 +5,7 @@ import com.online.shopping.model.*;
 import com.online.shopping.vo.ProductView;
 import com.online.shopping.vo.PurchaseView;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,4 +52,45 @@ public interface IShoppingService {
 
     List<ProductView> getProductInfoBySellerId(Integer sellerId);
 
+    /**
+     * 根据customerId获取payment列表
+     *
+     * @param customerId
+     * @return
+     */
+    List<Payment> getPaymentListByCustomerId(Integer customerId);
+
+    /**
+     * 根据customerId获取PurchaseHistory列表，按时间段筛选
+     *
+     * @param customerId
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    List<PurchaseHistory> getPurchaseHistoryListByCustomerId(Integer customerId, Date startDate, Date endDate);
+
+    /**
+     * 插入PurchaseHistory(自动更新商品数量)
+     *
+     * @param purchaseHistory
+     */
+    void insertPurchaseHistory(PurchaseHistory purchaseHistory);
+
+    /**
+     * 插入deliveryAddress
+     *
+     * @param deliveryAddress
+     */
+    void insertDeliveryAddress(DeliveryAddress deliveryAddress);
+
+    /**
+     * 插入payment
+     *
+     * @param payment
+     */
+    void insertPayment(Payment payment);
+
+
+//    void cancelPurchaseHistory(Integer phid);
 }

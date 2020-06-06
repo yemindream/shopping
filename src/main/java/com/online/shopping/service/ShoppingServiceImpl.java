@@ -10,6 +10,9 @@ import com.online.shopping.vo.PurchaseView;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,6 +41,9 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
 
     @Resource
     private RatingMapper ratingMapper;
+
+    @Resource
+    private DeliveryAddressMapper deliveryAddressMapper;
 
     @Override
     public Registration selectByUserName(String userName) {
@@ -150,5 +156,45 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
     public void updateSellerSelective(Seller seller) {
         sellerMapper.updateByPrimaryKeySelective(seller);
     }
+
+    @Override
+    public List<Payment> getPaymentListByCustomerId(Integer customerId) {
+        return paymentMapper.getPaymentListByCustomerId(customerId);
+    }
+
+    @Override
+    public List<PurchaseHistory> getPurchaseHistoryListByCustomerId(Integer customerId, Date startDate, Date endDate) {
+        try {
+            String startDateStr = null;
+            String endDateStr = null;
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            if (startDate != null) {
+                startDateStr = sdf.format(startDate);
+            }
+            if (endDate != null) {
+                endDateStr = sdf.format(endDate);
+            }
+            return purchaseHistoryMapper.getPurchaseHistoryListByCustomerId(customerId, startDateStr, endDateStr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+    }
+
+    @Override
+    public void insertPurchaseHistory(PurchaseHistory purchaseHistory) {
+        purchaseHistoryMapper.insertSelective(purchaseHistory);
+    }
+
+    @Override
+    public void insertDeliveryAddress(DeliveryAddress deliveryAddress) {
+        deliveryAddressMapper.insertSelective(deliveryAddress);
+    }
+
+    @Override
+    public void insertPayment(Payment payment) {
+        paymentMapper.insertSelective(payment);
+    }
+
 
 }
