@@ -184,6 +184,11 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
     @Override
     public void insertPurchaseHistory(PurchaseHistory purchaseHistory) {
         purchaseHistoryMapper.insertSelective(purchaseHistory);
+
+        //更新商品库存数量
+        Product product = productMapper.selectByPrimaryKey(purchaseHistory.getProductId());
+        product.setQuantity(product.getQuantity()-purchaseHistory.getQuantity());
+        productMapper.updateByPrimaryKey(product);
     }
 
     @Override
