@@ -10,8 +10,9 @@
   <sql id="Base_Column_List">
     id, customer_id, product_id, quantity
   </sql>
+  <!--
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from cart
     where id = #{id,jdbcType=INTEGER}
@@ -79,5 +80,5 @@
       quantity = #{quantity,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
+-->
 </mapper>

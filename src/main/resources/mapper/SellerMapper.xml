@@ -11,6 +11,7 @@
   <sql id="Base_Column_List" >
     id, name, selling_address, email, company_name
   </sql>
+  <!--
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -90,4 +91,5 @@
       company_name = #{companyName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  -->
 </mapper>

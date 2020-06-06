@@ -11,6 +11,7 @@
   <sql id="Base_Column_List" >
     id, customer_id, product_id, value, rating_date
   </sql>
+  <!--
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -90,4 +91,5 @@
       rating_date = #{ratingDate,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  -->
 </mapper>

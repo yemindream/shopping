@@ -16,6 +16,7 @@
   <sql id="Base_Column_List" >
     id, receiver_name, state, city, street, zip, phone, email, emergency_phone, customer_id
   </sql>
+  <!--
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -149,4 +150,5 @@
       customer_id = #{customerId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  -->
 </mapper>

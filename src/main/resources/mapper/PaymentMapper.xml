@@ -17,12 +17,14 @@
     id, card_type, card_holder, billing_address, expiration_date, valid_card_check, total_payment, 
     payment_date, purchase_id, state
   </sql>
+  <!--
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from payment
     where id = #{id,jdbcType=INTEGER}
   </select>
+  -->
   <select id="getPaymentListByCustomerId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select p.* from
 	payment p
@@ -37,6 +39,7 @@
     WHERE purchase_id=#{id}
     limit 1
   </select>
+  <!--
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from payment
     where id = #{id,jdbcType=INTEGER}
@@ -164,4 +167,5 @@
       state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  -->
 </mapper>

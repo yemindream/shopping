@@ -20,12 +20,14 @@
   <sql id="Base_Column_List" >
     id, product_id, quantity, delevery_address, create_date, state
   </sql>
+  <!--
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from purchase_history
     where id = #{id,jdbcType=BIGINT}
   </select>
+  -->
 
   <select id="selectByUserAndDate" resultMap="PurchaseHistoryView" parameterType="java.lang.String">
     SELECT ph.id,ph.product_id,ph.quantity,ph.delevery_address,ph.create_date,
@@ -49,7 +51,7 @@
       #{endDateStr}>=ph.create_date
     </if>
   </select>
-
+<!--
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from purchase_history
     where id = #{id,jdbcType=BIGINT}
@@ -135,4 +137,5 @@
       state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  -->
 </mapper>
