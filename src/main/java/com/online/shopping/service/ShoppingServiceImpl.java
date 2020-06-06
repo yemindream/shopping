@@ -148,6 +148,11 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
     }
 
     @Override
+    public List<ProductView> getAllProductInfo() {
+        return productMapper.getAllProductInfo();
+    }
+
+    @Override
     public Seller selectBySellerId(Integer id) {
         return sellerMapper.selectByPrimaryKey(id);
     }

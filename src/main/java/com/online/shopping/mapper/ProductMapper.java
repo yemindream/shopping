@@ -24,4 +24,6 @@ public interface ProductMapper {
     List<Product> selectAll();
 
     List<ProductView> getProductInfoBySellerId(@Param("id") Integer sellerId);
+
+    List<ProductView> getAllProductInfo();
 }

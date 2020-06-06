@@ -53,6 +53,13 @@ public interface IShoppingService {
     List<ProductView> getProductInfoBySellerId(Integer sellerId);
 
     /**
+     * 查询所有ProductView
+     *
+     * @return
+     */
+    List<ProductView> getAllProductInfo();
+
+    /**
      * 根据customerId获取payment列表
      *
      * @param customerId
@@ -95,8 +102,8 @@ public interface IShoppingService {
      * 取消下单（更新购物状态，更新商品库存）
      *
      * @param phid 购物记录id号
-     * @return  返回0,取消成功
-     *          返回1，用于已支付，无法取消（只能退货）
+     * @return 返回0, 取消成功
+     * 返回1，用于已支付，无法取消（只能退货）
      */
     int cancelPurchase(Long phid);
 
@@ -104,8 +111,8 @@ public interface IShoppingService {
      * 退货（更新支付状态，更新购物状态，更新库存）
      *
      * @param phid
-     * @return   返回0，退货成功
-     *           返回1，用户未支付该商品，无法退货
+     * @return 返回0，退货成功
+     * 返回1，用户未支付该商品，无法退货
      */
     int returnPurchase(Long phid);
 }
