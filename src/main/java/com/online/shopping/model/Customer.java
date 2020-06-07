@@ -2,10 +2,13 @@ package com.online.shopping.model;
 
 import lombok.Data;
 
+import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Data
 public class Customer {
+
+    @Id
     private Integer id;
 
     private String name;

@@ -6,7 +6,6 @@ import com.online.shopping.vo.ProductView;
 import com.online.shopping.vo.PurchaseView;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,7 +44,7 @@ public interface IShoppingService {
 
     AppPage<List<PurchaseView>> selectPurchaseHistory(Integer integer, Integer currentpage, Integer perpage, String date);
 
-    void insertRatingSelective(Rating rate);
+//    void insertRatingSelective(Rating rate);
 
     PurchaseHistory selectPurchaseHistoryById(Long id);
 

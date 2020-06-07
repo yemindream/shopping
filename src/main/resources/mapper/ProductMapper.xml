@@ -41,18 +41,18 @@
     select * from product
   </select>
   <select id="getProductInfoBySellerId" parameterType="java.lang.Integer" resultMap="ProductViewMap">
-    select p.*,CAST(AVG(r.`value`) AS DECIMAL(10,2)) as avg_rate
+    select p.*,CAST(AVG(ph.`rating`) AS DECIMAL(10,2)) as avg_rate
     from product p
-    left join rating r on p.id=r.product_id
+    left join purchase_history ph on p.id=ph.product_id
     inner join seller s on p.seller=s.id
     WHERE s.id=#{id}
     GROUP BY p.id
     ORDER BY avg_rate DESC
   </select>
   <select id="getAllProductInfo" resultMap="ProductViewMap">
-    select p.*,CAST(AVG(r.`value`) AS DECIMAL(10,2)) as avg_rate
+    select p.*,CAST(AVG(ph.`rating`) AS DECIMAL(10,2)) as avg_rate
     from product p
-    left join rating r on p.id=r.product_id
+    left join purchase_history ph on p.id=ph.product_id
     inner join seller s on p.seller=s.id
     WHERE 1=1
     GROUP BY p.id

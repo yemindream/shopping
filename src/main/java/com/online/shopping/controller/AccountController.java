@@ -3,6 +3,7 @@ package com.online.shopping.controller;
 import com.google.common.base.Strings;
 import com.online.shopping.common.result.ResultJson;
 import com.online.shopping.common.result.ResultUtil;
+import com.online.shopping.model.Customer;
 import com.online.shopping.model.DeliveryAddress;
 import com.online.shopping.model.Registration;
 import org.springframework.web.bind.annotation.*;
@@ -87,5 +88,16 @@ public class AccountController extends BaseController {
     public ResultJson register(@RequestBody DeliveryAddress deliveryAddress) {
         shoppingService.insertDeliveryAddress(deliveryAddress);
         return ResultUtil.successWithMsg("成功");
+    }
+
+    /**
+     * 测试2
+     *
+     * @return
+     */
+    @PostMapping("/test2")
+    public ResultJson<Object> register(@RequestParam("id") Integer id) {
+        Customer customer = shoppingService.selectByCustomerId(id);
+        return ResultUtil.successWithData(customer);
     }
 }

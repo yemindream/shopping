@@ -13,7 +13,6 @@ import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,8 +39,8 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
     @Resource
     private PurchaseHistoryMapper purchaseHistoryMapper;
 
-    @Resource
-    private RatingMapper ratingMapper;
+//    @Resource
+//    private RatingMapper ratingMapper;
 
     @Resource
     private DeliveryAddressMapper deliveryAddressMapper;
@@ -128,10 +127,10 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
         return page.convertToAppPageModel();
     }
 
-    @Override
-    public void insertRatingSelective(Rating rate) {
-        ratingMapper.insertSelective(rate);
-    }
+//    @Override
+//    public void insertRatingSelective(Rating rate) {
+//        ratingMapper.insertSelective(rate);
+//    }
 
     @Override
     public PurchaseHistory selectPurchaseHistoryById(Long id) {

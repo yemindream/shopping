@@ -23,6 +23,8 @@ public class PurchaseHistory {
 
     private Integer state;
 
+    private Integer rating;
+
     public PurchaseHistory() {
     }
 
