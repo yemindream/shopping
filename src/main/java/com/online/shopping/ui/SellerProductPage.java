@@ -22,19 +22,16 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Route(value = "seller/product", layout = MainLayout.class)
 public class SellerProductPage extends VerticalLayout implements HasUrlParameter<Integer> {
-    private Grid<ProductView> grid = new Grid<>(ProductView.class, false);
     @Autowired
     private IShoppingService shoppingService;
+    private Grid<ProductView> grid = new Grid<>(ProductView.class, false);
     private int sellerId;
 
     public SellerProductPage() {
         ProductForm productForm = new ProductForm();
         productForm.setProduct(null);
         grid.setColumns("id", "type", "price", "quantity", "description", "avgRatingValue");
-        grid.setSelectionMode(Grid.SelectionMode.SINGLE);
-        grid.asSingleSelect().addValueChangeListener(event -> {
-            productForm.setProduct(grid.asSingleSelect().getValue());
-        });
+        grid.asSingleSelect().addValueChangeListener(event -> productForm.setProduct(grid.asSingleSelect().getValue()));
         Button btnAdd = new Button("Add", event -> {
             grid.asSingleSelect().clear();
             productForm.setProduct(new Product());
@@ -92,9 +89,9 @@ public class SellerProductPage extends VerticalLayout implements HasUrlParameter
         private void setProduct(Product product) {
             binder.setBean(product);
             if (product == null) {
-//                setVisible(false);
+                setVisible(false);
             } else {
-//                setVisible(true);
+                setVisible(true);
                 type.focus();
             }
         }

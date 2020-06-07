@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -168,7 +169,7 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
     }
 
     @Override
-    public List<PurchaseHistory> getPurchaseHistoryListByCustomerId(Integer customerId, Date startDate, Date endDate) {
+    public List<PurchaseHistory> getPurchaseHistoryListByCustomerId(Integer customerId, LocalDate startDate, LocalDate endDate) {
         try {
             String startDateStr = null;
             String endDateStr = null;

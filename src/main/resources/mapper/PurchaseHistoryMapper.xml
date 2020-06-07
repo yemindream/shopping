@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="product_id" property="productId" jdbcType="BIGINT" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
-    <result column="delevery_address" property="deleveryAddress" jdbcType="INTEGER" />
+    <result column="delivery_address" property="deliveryAddress" jdbcType="INTEGER" />
     <result column="create_date" property="createDate" jdbcType="DATE" />
     <result column="state" property="state" jdbcType="INTEGER" />
   </resultMap>
@@ -13,12 +13,12 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="product_id" property="productId" jdbcType="BIGINT" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
-    <result column="delevery_address" property="deleveryAddress" jdbcType="INTEGER" />
+    <result column="delivery_address" property="deliveryAddress" jdbcType="INTEGER" />
     <result column="create_date" property="createDate" jdbcType="DATE" />
     <result column="state" property="state" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, product_id, quantity, delevery_address, create_date, state
+    id, product_id, quantity, delivery_address, create_date, state
   </sql>
   <!--
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -30,10 +30,10 @@
   -->
 
   <select id="selectByUserAndDate" resultMap="PurchaseHistoryView" parameterType="java.lang.String">
-    SELECT ph.id,ph.product_id,ph.quantity,ph.delevery_address,ph.create_date,
+    SELECT ph.id,ph.product_id,ph.quantity,ph.delivery_address,ph.create_date,
      ph.state,p.type,p.price,p.image
     FROM purchase_history ph
-    INNER JOIN delivery_address da on da.id = ph.delevery_address
+    INNER JOIN delivery_address da on da.id = ph.delivery_address
     INNER JOIN product p on p.id=ph.product_id
     WHERE da.customer_id=#{customerid} AND ph.create_date=#{datestr};
   </select>
@@ -41,7 +41,7 @@
   <select id="getPurchaseHistoryListByCustomerId" resultMap="BaseResultMap">
 	select ph.*
 	from purchase_history ph
-	inner join	delivery_address da on ph.delevery_address=da.id
+	inner join	delivery_address da on ph.delivery_address=da.id
     inner join customer c on c.id = da.customer_id
 	where c.id=#{id}
 	<if test="startDateStr!=null">
@@ -58,10 +58,10 @@
   </delete>
   <insert id="insert" parameterType="com.online.shopping.model.PurchaseHistory" >
     insert into purchase_history (id, product_id, quantity, 
-      delevery_address, create_date, state
+      delivery_address, create_date, state
       )
     values (#{id,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{quantity,jdbcType=INTEGER}, 
-      #{deleveryAddress,jdbcType=INTEGER}, #{createDate,jdbcType=DATE}, #{state,jdbcType=INTEGER}
+      #{deliveryAddress,jdbcType=INTEGER}, #{createDate,jdbcType=DATE}, #{state,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.online.shopping.model.PurchaseHistory" >
@@ -76,8 +76,8 @@
       <if test="quantity != null" >
         quantity,
       </if>
-      <if test="deleveryAddress != null" >
-        delevery_address,
+      <if test="deliveryAddress != null" >
+        delivery_address,
       </if>
       <if test="createDate != null" >
         create_date,
@@ -96,8 +96,8 @@
       <if test="quantity != null" >
         #{quantity,jdbcType=INTEGER},
       </if>
-      <if test="deleveryAddress != null" >
-        #{deleveryAddress,jdbcType=INTEGER},
+      <if test="deliveryAddress != null" >
+        #{deliveryAddress,jdbcType=INTEGER},
       </if>
       <if test="createDate != null" >
         #{createDate,jdbcType=DATE},
@@ -116,8 +116,8 @@
       <if test="quantity != null" >
         quantity = #{quantity,jdbcType=INTEGER},
       </if>
-      <if test="deleveryAddress != null" >
-        delevery_address = #{deleveryAddress,jdbcType=INTEGER},
+      <if test="deliveryAddress != null" >
+        delivery_address = #{deliveryAddress,jdbcType=INTEGER},
       </if>
       <if test="createDate != null" >
         create_date = #{createDate,jdbcType=DATE},
@@ -132,7 +132,7 @@
     update purchase_history
     set product_id = #{productId,jdbcType=BIGINT},
       quantity = #{quantity,jdbcType=INTEGER},
-      delevery_address = #{deleveryAddress,jdbcType=INTEGER},
+      delivery_address = #{deliveryAddress,jdbcType=INTEGER},
       create_date = #{createDate,jdbcType=DATE},
       state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}

@@ -30,4 +30,22 @@ public class DeliveryAddress {
 
     private Integer customerId;
 
+    public DeliveryAddress() {
+    }
+
+    public DeliveryAddress(String receiverName, String state, String city, String street, String zip, String phone, String email, String emergencyPhone, Integer customerId) {
+        this.receiverName = receiverName;
+        this.state = state;
+        this.city = city;
+        this.street = street;
+        this.zip = zip;
+        this.phone = phone;
+        this.email = email;
+        this.emergencyPhone = emergencyPhone;
+        this.customerId = customerId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 }

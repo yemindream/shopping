@@ -29,7 +29,7 @@
     select p.* from
 	payment p
 	inner join		purchase_history ph on p.purchase_id=ph.id
-	inner join		delivery_address da on ph.delevery_address=da.id
+	inner join		delivery_address da on ph.delivery_address=da.id
     inner join customer c on c.id = da.customer_id
 	where c.id=#{id}
   </select>

@@ -5,6 +5,7 @@ import com.online.shopping.model.*;
 import com.online.shopping.vo.ProductView;
 import com.online.shopping.vo.PurchaseView;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -75,7 +76,7 @@ public interface IShoppingService {
      * @param endDate
      * @return
      */
-    List<PurchaseHistory> getPurchaseHistoryListByCustomerId(Integer customerId, Date startDate, Date endDate);
+    List<PurchaseHistory> getPurchaseHistoryListByCustomerId(Integer customerId, LocalDate startDate, LocalDate endDate);
 
     /**
      * 插入PurchaseHistory(自动更新商品数量)
