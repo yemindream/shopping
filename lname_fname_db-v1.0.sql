@@ -117,28 +117,12 @@ CREATE TABLE `purchase_history`  (
   `delivery_address` int(11) NULL DEFAULT NULL,
   `create_date` date NULL DEFAULT NULL,
   `state` int(1) NOT NULL DEFAULT 0 COMMENT '状态（0：正常购买，1：取消，2：退货）',
+  `rating` int(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_purchase_delivery_idx`(`delivery_address`) USING BTREE,
   INDEX `fk_purchase_product_idx`(`product_id`) USING BTREE,
   CONSTRAINT `fk_purchase_delivery` FOREIGN KEY (`delivery_address`) REFERENCES `delivery_address` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_purchase_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for rating
--- ----------------------------
-DROP TABLE IF EXISTS `rating`;
-CREATE TABLE `rating`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `customer_id` int(11) NOT NULL,
-  `product_id` bigint(20) NOT NULL,
-  `value` int(11) NULL DEFAULT NULL,
-  `rating_date` date NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `fk_rating_customer_idx`(`customer_id`) USING BTREE,
-  INDEX `fk_rating_product_idx`(`product_id`) USING BTREE,
-  CONSTRAINT `fk_rating_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_rating_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
