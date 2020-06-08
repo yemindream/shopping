@@ -33,7 +33,7 @@
     inner join customer c on c.id = da.customer_id
 	where c.id=#{id}
   </select>
-  <select id="selectByPurchaseId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  <select id="selectByPurchaseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
     select * FROM
     payment
     WHERE purchase_id=#{id}

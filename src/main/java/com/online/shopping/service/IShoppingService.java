@@ -36,7 +36,7 @@ public interface IShoppingService {
 
     AppPage<List<Product>> selectAllProduct(Integer currentpage, Integer perpage);
 
-    Payment selectByPaymentId(Integer id);
+    Payment selectByPaymentId(Long id);
 
     void updatePaymentSelective(Payment payment);
 

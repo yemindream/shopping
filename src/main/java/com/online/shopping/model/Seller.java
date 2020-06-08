@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 @Data
 public class Seller {
+    @Id
     private Integer id;
 
     private String name;

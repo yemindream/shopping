@@ -23,7 +23,7 @@ public class PurchaseView {
     private Integer state;
 
     //product表
-    private Integer type;
+    private String type;
     private Double price;
     private String image;
 

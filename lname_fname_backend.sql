@@ -1,3 +1,4 @@
+
 use `online_shopping`;
 
 SET NAMES utf8mb4;
@@ -85,7 +86,7 @@ CREATE TABLE `payment`  (
   `total_payment` decimal(10, 0) NULL DEFAULT NULL,
   `payment_date` date NULL DEFAULT NULL,
   `purchase_id` int(11) NULL DEFAULT NULL,
-  `state` int(1) NOT NULL DEFAULT 0 COMMENT '状态（0：已下单，待支付，1：支付成功，2：支付失败）',
+  `state` int(1) NOT NULL DEFAULT 0 COMMENT 'state(0: created; 1: pay success; 2: pay failed)',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
@@ -116,7 +117,7 @@ CREATE TABLE `purchase_history`  (
   `quantity` int(11) NULL DEFAULT NULL,
   `delivery_address` int(11) NULL DEFAULT NULL,
   `create_date` date NULL DEFAULT NULL,
-  `state` int(1) NOT NULL DEFAULT 0 COMMENT '状态（0：正常购买，1：取消，2：退货）',
+  `state` int(1) NOT NULL DEFAULT 0 COMMENT 'state(0: buy; 1: cancel; 2: send back)',
   `rating` int(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_purchase_delivery_idx`(`delivery_address`) USING BTREE,

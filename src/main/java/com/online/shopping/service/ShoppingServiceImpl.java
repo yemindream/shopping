@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
@@ -104,7 +105,7 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
     }
 
     @Override
-    public Payment selectByPaymentId(Integer id) {
+    public Payment selectByPaymentId(Long id) {
         return paymentMapper.selectByPrimaryKey(id);
     }
 
@@ -172,12 +173,11 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
         try {
             String startDateStr = null;
             String endDateStr = null;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             if (startDate != null) {
-                startDateStr = sdf.format(startDate);
+                startDateStr = startDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
             }
             if (endDate != null) {
-                endDateStr = sdf.format(endDate);
+                endDateStr = endDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
             }
             return purchaseHistoryMapper.getPurchaseHistoryListByCustomerId(customerId, startDateStr, endDateStr);
         } catch (Exception e) {
@@ -208,11 +208,11 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
 
     @Override
     public int cancelPurchase(Long phid) {
-        Payment payment = paymentMapper.selectByPurchaseId(phid);
-        if (payment != null && payment.getState() == 1) {
-            logger.info("用户已经支付了该商品，无法取消（只能退货）");
-            return 1;
-        }
+//        Payment payment = paymentMapper.selectByPurchaseId(phid);
+//        if (payment != null && payment.getState() == 1) {
+//            logger.info("用户已经支付了该商品，无法取消（只能退货）");
+//            return 1;
+//        }
         PurchaseHistory purchaseHistory = purchaseHistoryMapper.selectByPrimaryKey(phid);
         purchaseHistory.setState(1);
         purchaseHistoryMapper.updateByPrimaryKey(purchaseHistory);
@@ -228,10 +228,10 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
     @Override
     public int returnPurchase(Long phid) {
         Payment payment = paymentMapper.selectByPurchaseId(phid);
-        if (payment==null || payment.getState() != 1) {
-            logger.info("用户未支付该商品，无法退货");
-            return 1;
-        }
+//        if (payment==null || payment.getState() != 1) {
+//            logger.info("用户未支付该商品，无法退货");
+//            return 1;
+//        }
         if (payment!=null){
             payment.setState(3);
             paymentMapper.updateByPrimaryKey(payment);

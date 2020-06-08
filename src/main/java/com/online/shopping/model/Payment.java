@@ -12,7 +12,7 @@ public class Payment {
 
     @Id
     @GeneratedValue(generator = "JDBC")
-    private Integer id;
+    private Long id;
 
     private String cardType;
 
@@ -45,11 +45,11 @@ public class Payment {
         paymentDate = new Date();
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

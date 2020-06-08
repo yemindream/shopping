@@ -40,6 +40,7 @@ public class SellerProductPage extends VerticalLayout implements HasUrlParameter
         HorizontalLayout mainContent = new HorizontalLayout(grid, productForm);
         mainContent.setSizeFull();
         grid.setSizeFull();
+        setSizeFull();
         add(btnAdd, mainContent);
     }
 
@@ -76,6 +77,7 @@ public class SellerProductPage extends VerticalLayout implements HasUrlParameter
             });
 
             add(type, nfPrice, quantity, description, btnSave);
+            binder.bindInstanceFields(this);
             binder.forField(nfPrice).bind(product -> {
                 Long price = product.getPrice();
                 if (price == null) {
@@ -83,7 +85,6 @@ public class SellerProductPage extends VerticalLayout implements HasUrlParameter
                 }
                 return price.doubleValue();
             }, (product, fieldvalue) -> product.setPrice(fieldvalue.longValue()));
-            binder.bindInstanceFields(this);
         }
 
         private void setProduct(Product product) {
