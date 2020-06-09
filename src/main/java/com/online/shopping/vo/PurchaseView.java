@@ -4,9 +4,6 @@ import lombok.Data;
 
 import java.util.Date;
 
-/**
- * Created by min.ye on 2020/6/3.
- */
 @Data
 public class PurchaseView {
 
@@ -22,7 +19,7 @@ public class PurchaseView {
 
     private Integer state;
 
-    //product表
+    //product table
     private String type;
     private Double price;
     private String image;

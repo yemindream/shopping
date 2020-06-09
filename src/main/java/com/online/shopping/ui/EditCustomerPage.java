@@ -15,9 +15,6 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Created by yanry on 2020/6/4.
- */
 @Route(value = "customer/edit", layout = MainLayout.class)
 public class EditCustomerPage extends FormLayout implements HasUrlParameter<Integer> {
     private TextField name = new TextField("Name");

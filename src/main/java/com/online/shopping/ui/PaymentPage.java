@@ -14,9 +14,6 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Created by yanry on 2020/6/5.
- */
 @Route(value = "customer/payment", layout = MainLayout.class)
 public class PaymentPage extends HorizontalLayout implements HasUrlParameter<Integer> {
     private Grid<Payment> grid = new Grid<>(Payment.class);

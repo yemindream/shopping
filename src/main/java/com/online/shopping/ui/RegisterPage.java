@@ -11,9 +11,6 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Created by yanry on 2020/6/4.
- */
 @Route(value = "register", layout = MainLayout.class)
 public class RegisterPage extends FormLayout {
     @Autowired

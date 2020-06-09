@@ -5,42 +5,22 @@ import java.io.Serializable;
 /**
  * json object of response.
  *
- * @author yemin
  *
  */
 public final class ResultJson<T> implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  /**
-   * 结果.
-   */
   private Integer resultCode;
 
-  /**
-   * 返回数据.
-   */
   private T resultData;
 
-  /**
-   * 消息.
-   */
   private String msg;
 
-  /**
-   * 空构造方法.
-   */
   public ResultJson() {
     super();
   }
 
-  /**
-   * 有参构造方法.
-   *
-   * @param resultCode resultCode
-   * @param resultData resultData
-   * @param msg msg
-   */
   public ResultJson(final Integer resultCode, final T resultData,
                     final String msg) {
     super();
@@ -49,56 +29,26 @@ public final class ResultJson<T> implements Serializable {
     this.msg = msg;
   }
 
-  /**
-   * 获取消息.
-   *
-   * @return msg.
-   */
   public String getMsg() {
     return msg;
   }
 
-  /**
-   * 设置消息.
-   *
-   * @param msg msg
-   */
   public void setMsg(final String msg) {
     this.msg = msg;
   }
 
-  /**
-   * 获得结果.
-   *
-   * @return resultCode
-   */
   public Integer getResultCode() {
     return resultCode;
   }
 
-  /**
-   * 设置结果.
-   *
-   * @param resultCode resultCode
-   */
   public void setResultCode(final Integer resultCode) {
     this.resultCode = resultCode;
   }
 
-  /**
-   * 获得结果数据.
-   *
-   * @return resultData
-   */
   public T getResultData() {
     return resultData;
   }
 
-  /**
-   * 设置结果数据.
-   *
-   * @param resultData resultData
-   */
   public void setResultData(final T resultData) {
     this.resultData = resultData;
   }

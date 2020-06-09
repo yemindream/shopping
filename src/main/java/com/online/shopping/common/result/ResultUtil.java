@@ -9,45 +9,27 @@ import java.util.Map;
 /**
  * response util.
  *
- * @author yemin
  */
 public final class ResultUtil {
 
     private ResultUtil() {
     }
 
-    /**
-     * 日志类.
-     */
     private static Logger logger = LoggerFactory.getLogger(ResultUtil.class);
 
     // ======================================================
 
 
     /**
-     * codeMpa.
+     * codeMap.
      */
     private static Map<Integer, String> msgCodeMap = null; // key:error_code ,
     // value:error_msg
 
-    /**
-     * 获取结果.
-     *
-     * @param resultCode resultCode
-     * @return ResultJson
-     */
     public static final <T> ResultJson<T> getResult(final int resultCode) {
         return getResult(resultCode, null, null);
     }
 
-    /**
-     * 获取结果.
-     *
-     * @param resultCode resultCode
-     * @param data       data
-     * @param message    message
-     * @returnResultJson
-     */
     public static final <T> ResultJson<T> getResult(int resultCode, final T data,
                                                     String message) {
 

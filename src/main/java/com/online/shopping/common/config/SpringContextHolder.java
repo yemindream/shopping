@@ -7,14 +7,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
-/**
- * 工具类：
- *
- * 本类中持有spring容器对象的引用，可方便获取spring容器中维护的对象
- *
- * @author yemin
- *
- */
 @Service
 public final class SpringContextHolder
     implements ApplicationContextAware, DisposableBean {
@@ -46,9 +38,6 @@ public final class SpringContextHolder
     return holdApplicationContext.getBean(beanName, clazz);
   }
 
-  /**
-   * 清除SpringContextHolder中的ApplicationContext为Null.
-   */
   public static void clearHolder() {
     if (logger.isDebugEnabled()) {
       logger.debug("clear SpringContextHolder ApplicationContext:"
@@ -57,9 +46,6 @@ public final class SpringContextHolder
     holdApplicationContext = null;
   }
 
-  /**
-   * 实现DisposableBean接口, 在Context关闭时清理静态变量.
-   */
   @Override
   public void destroy() throws Exception {
     SpringContextHolder.clearHolder();

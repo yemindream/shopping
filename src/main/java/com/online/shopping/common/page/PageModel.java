@@ -6,34 +6,25 @@ import com.github.pagehelper.PageHelper;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * 分页.
- *
- * @param <T> T
- * @author yemin
- */
 public class PageModel<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
     /**
-     * 每页显示多少条
+     * item count per page
      */
     private int perpage = 10;
     /**
-     * 当前显示第几页.
+     * current page
      */
     private int currentpage = 1;
     /**
-     * 总共有多少条.
+     * total item count
      */
     private int totalcount = 0;
     /**
-     * 总共有多少页.
+     * total page count
      */
     private int totalpage = 0;
-    /**
-     * 放数据.
-     */
     private List<T> data;
 
     public PageModel() {
@@ -73,42 +64,22 @@ public class PageModel<T> implements Serializable {
     public void setPerpage(final int perpage) {
         this.perpage = perpage;
         if (totalcount != 0) {
-            setTotalcount(totalcount); // 重新设置条数和页数（计算页数会用到everyPageCount）
+            setTotalcount(totalcount);
         }
     }
 
-    /**
-     * 获取当前显示第几页.
-     *
-     * @return Integer
-     */
     public int getCurrentpage() {
         return currentpage;
     }
 
-    /**
-     * 设置当前显示第几页.
-     *
-     * @param currentpage CurrentPage
-     */
     public void setCurrentpage(final int currentpage) {
         this.currentpage = currentpage;
     }
 
-    /**
-     * 获取总共有几页.
-     *
-     * @return Integer
-     */
     public int getTotalcount() {
         return totalcount;
     }
 
-    /**
-     * 设置总共有几页.
-     *
-     * @param totalcount totalCount
-     */
     public void setTotalcount(final int totalcount) {
         this.totalcount = totalcount;
 
@@ -120,52 +91,26 @@ public class PageModel<T> implements Serializable {
         }
     }
 
-    /**
-     * 获取总共多少页.
-     *
-     * @return Integer
-     */
     public int getTotalpage() {
         return totalpage;
     }
 
-    /**
-     * 设置总共多少页。
-     *
-     * @param totalpage
-     */
     public void setTotalpage(final int totalpage) {
         this.totalpage = totalpage;
     }
 
-    /**
-     * 获得数据.
-     *
-     * @return List
-     */
     public List<T> getData() {
         return data;
     }
 
-    /**
-     * @param data
-     */
     public void setData(final List<T> data) {
         this.data = data;
     }
 
-    /**
-     * start.
-     */
     public void start() {
         PageHelper.startPage(currentpage, perpage);
     }
 
-    /**
-     * 设置结果.
-     *
-     * @param cvList list
-     */
     @SuppressWarnings({"rawtypes", "unchecked"})
     public void setResult(final List cvList) {
         if (cvList != null && !cvList.isEmpty()) {

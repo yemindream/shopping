@@ -22,9 +22,6 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Created by yanry on 2020/6/6.
- */
 @Route(value = "customer/product", layout = MainLayout.class)
 public class CustomerProductPage extends HorizontalLayout implements HasUrlParameter<Integer> {
     private Grid<ProductView> grid = new Grid<>(ProductView.class);

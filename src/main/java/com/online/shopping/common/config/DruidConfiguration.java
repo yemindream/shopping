@@ -17,9 +17,6 @@ import com.alibaba.druid.support.http.WebStatFilter;
 /**
  * druid configuration
  *
- * @author : yemin
- * @date : 2018年7月31日 上午10:28:23
- *
  */
 @Configuration
 public class DruidConfiguration {
@@ -36,7 +33,6 @@ public class DruidConfiguration {
         new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
     servletRegistrationBean.addInitParameter("loginUsername", "root");
     servletRegistrationBean.addInitParameter("loginPassword", "shop975");
-    // 是否能够重置数据 禁用HTML页面上的“Reset All”功能
     servletRegistrationBean.addInitParameter("resetEnable", "false");
     return servletRegistrationBean;
   }
@@ -51,7 +47,6 @@ public class DruidConfiguration {
     return filterRegistrationBean;
   }
 
-  // 解决 spring.datasource.filters=stat,wall,log4j 无法正常注册进去
   @ConfigurationProperties(prefix = DB_PREFIX)
   class IDataSourceProperties {
     private String url;
@@ -73,8 +68,8 @@ public class DruidConfiguration {
     private String filters;
     private String connectionProperties;
 
-    @Bean // 声明其为Bean实例
-    @Primary // 在同样的DataSource中，首先使用被标注的DataSource
+    @Bean
+    @Primary
     public DataSource dataSource() {
       final DruidDataSource datasource = new DruidDataSource();
       datasource.setUrl(url);

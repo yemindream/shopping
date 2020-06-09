@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * 全局异常处理(未被controller正常捕获的异常，都会到这里)
- * <p/>
- * Created by min.ye on 2020/1/15.
- */
 @ControllerAdvice
 @ResponseBody
 public class GlobalExceptionHandle {
@@ -25,8 +20,8 @@ public class GlobalExceptionHandle {
     @ExceptionHandler(value = Exception.class)
     public final Object handleException(final Exception e,
                                             final HttpServletResponse response) {
-        logger.error("请求出现错误:", e);
-        Object returnData = ResultUtil.failWithMsg("网络异常，请稍后重试");
+        logger.error("request error: ", e);
+        Object returnData = ResultUtil.failWithMsg("network error, try again later.");
         return returnData;
     }
 }

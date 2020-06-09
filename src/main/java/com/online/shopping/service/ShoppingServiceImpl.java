@@ -16,9 +16,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by min.ye on 2020/6/2.
- */
 @Service
 public class ShoppingServiceImpl extends BaseService implements IShoppingService {
 
@@ -190,7 +187,7 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
     public void insertPurchaseHistory(PurchaseHistory purchaseHistory) {
         purchaseHistoryMapper.insertSelective(purchaseHistory);
 
-        //更新商品库存数量
+        //update product count
         Product product = productMapper.selectByPrimaryKey(purchaseHistory.getProductId());
         product.setQuantity(product.getQuantity() - purchaseHistory.getQuantity());
         productMapper.updateByPrimaryKey(product);
@@ -208,16 +205,11 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
 
     @Override
     public int cancelPurchase(Long phid) {
-//        Payment payment = paymentMapper.selectByPurchaseId(phid);
-//        if (payment != null && payment.getState() == 1) {
-//            logger.info("用户已经支付了该商品，无法取消（只能退货）");
-//            return 1;
-//        }
         PurchaseHistory purchaseHistory = purchaseHistoryMapper.selectByPrimaryKey(phid);
         purchaseHistory.setState(1);
         purchaseHistoryMapper.updateByPrimaryKey(purchaseHistory);
 
-        //更新商品库存数量
+        //update product count
         Product product = productMapper.selectByPrimaryKey(purchaseHistory.getProductId());
         product.setQuantity(product.getQuantity() + purchaseHistory.getQuantity());
         productMapper.updateByPrimaryKey(product);
@@ -228,10 +220,6 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
     @Override
     public int returnPurchase(Long phid) {
         Payment payment = paymentMapper.selectByPurchaseId(phid);
-//        if (payment==null || payment.getState() != 1) {
-//            logger.info("用户未支付该商品，无法退货");
-//            return 1;
-//        }
         if (payment!=null){
             payment.setState(3);
             paymentMapper.updateByPrimaryKey(payment);
@@ -241,7 +229,7 @@ public class ShoppingServiceImpl extends BaseService implements IShoppingService
         purchaseHistory.setState(2);
         purchaseHistoryMapper.updateByPrimaryKey(purchaseHistory);
 
-        //更新商品库存数量
+        //update product count
         Product product = productMapper.selectByPrimaryKey(purchaseHistory.getProductId());
         product.setQuantity(product.getQuantity() + purchaseHistory.getQuantity());
         productMapper.updateByPrimaryKey(product);

@@ -14,9 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
 
-/**
- * Created by yanry on 2020/6/4.
- */
 @Route
 public class MainView extends FormLayout {
     @Autowired

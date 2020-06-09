@@ -3,22 +3,17 @@ package com.online.shopping.common.page;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * 分页
- *
- * @author yemin
- */
 public class AppPage
         <T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int perpage = 10;// 每页显示多少条
-    private int currentpage = 1;// 当前显示第几页
-    private int totalcount = 0;// 总共有多少条
-    private int totalpage = 0;// 总共有多少页
+    private int perpage = 10;// item count per page
+    private int currentpage = 1;
+    private int totalcount = 0;
+    private int totalpage = 0;
 
-    private List<T> data;// 放数据
+    private List<T> data;
 
     public AppPage() {
         super();
@@ -42,7 +37,7 @@ public class AppPage
     public void setPerpage(final int perpage) {
         this.perpage = perpage;
         if (totalcount != 0)
-            setTotalcount(totalcount);// 重新设置条数和页数（计算页数会用到everyPageCount）
+            setTotalcount(totalcount);
     }
 
     public int getCurrentpage() {
@@ -60,8 +55,8 @@ public class AppPage
     public void setTotalcount(final int totalcount) {
         this.totalcount = totalcount;
 
-        int pageCount = totalcount / this.perpage;// 取除的结果
-        final int yu = totalcount % this.perpage;// 取余
+        int pageCount = totalcount / this.perpage;
+        final int yu = totalcount % this.perpage;
         if (yu > 0)
             pageCount++;
         this.totalpage = pageCount;

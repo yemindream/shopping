@@ -11,9 +11,6 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Created by yanry on 2020/6/4.
- */
 @Route(value = "customer", layout = MainLayout.class)
 public class CustomerPage extends VerticalLayout implements HasUrlParameter<Integer> {
     private H1 title = new H1();

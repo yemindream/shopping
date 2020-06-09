@@ -116,21 +116,16 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- 使用MVC模式，开启web接口 start -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- 使用MVC模式，开启web接口 end -->
 
-        <!-- Mybatis 通用Mapper -->
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
             <version>2.0.2</version>
         </dependency>
-        <!-- Mybatis 通用Mapper end -->
-        <!-- pagehelper分页 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -141,7 +136,6 @@
             <artifactId>pagehelper-spring-boot-autoconfigure</artifactId>
             <version>1.2.3</version>
         </dependency>
-        <!-- pagehelper分页 end -->
 
         <!-- MySQL -->
         <dependency>
@@ -152,15 +146,12 @@
         </dependency>
         <!-- MySQL end -->
 
-        <!-- 配置druid数据库连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.0.20</version>
         </dependency>
-        <!-- 配置druid数据库连接池 end -->
 
-        <!--常用包-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -177,7 +168,6 @@
             <optional>true</optional>
             <version>1.18.10</version>
         </dependency>
-        <!--常用包 end -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
